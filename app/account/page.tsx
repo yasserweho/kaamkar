@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import { Shell } from "@/components/Shell";
+import { AuthButtons } from "@/components/AuthButtons";
 
 type Profile = { name: string; role: "seeker" | "employer"; phone: string; city: string };
 
@@ -14,6 +16,7 @@ export default function AccountPage() {
 }
 
 function Account() {
+  const { data } = useSession();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [apps, setApps] = useState<Array<{ title: string; at: string }>>([]);
 
@@ -40,23 +43,29 @@ function Account() {
     <div className="wrap" style={{ maxWidth: 640, paddingBottom: 64 }}>
       <div className="page-head">
         <h1>Account</h1>
+        <p className="meta">Sign in with Gmail or X, then save your seeker or employer details.</p>
       </div>
-      <form className="form panel" onSubmit={onSubmit}>
-        <label>Name</label>
-        <input name="name" defaultValue={profile?.name} required />
-        <label>I am</label>
-        <select name="role" defaultValue={profile?.role || "seeker"}>
-          <option value="seeker">Job seeker</option>
-          <option value="employer">Employer</option>
-        </select>
-        <label>WhatsApp</label>
-        <input name="phone" defaultValue={profile?.phone} />
-        <label>City</label>
-        <input name="city" defaultValue={profile?.city} />
-        <button className="go" type="submit">
-          Save profile
-        </button>
-      </form>
+      <div className="panel" style={{ marginBottom: 16 }}>
+        <AuthButtons />
+      </div>
+      {data?.user && (
+        <form className="form panel" onSubmit={onSubmit}>
+          <label>Name</label>
+          <input name="name" defaultValue={profile?.name || data.user.name || ""} required />
+          <label>I am</label>
+          <select name="role" defaultValue={profile?.role || "seeker"}>
+            <option value="seeker">Job seeker</option>
+            <option value="employer">Employer</option>
+          </select>
+          <label>WhatsApp</label>
+          <input name="phone" defaultValue={profile?.phone} />
+          <label>City</label>
+          <input name="city" defaultValue={profile?.city} />
+          <button className="go" type="submit">
+            Save profile
+          </button>
+        </form>
+      )}
       {apps.length > 0 && (
         <div className="panel" style={{ marginTop: 16 }}>
           <strong>Applications</strong>

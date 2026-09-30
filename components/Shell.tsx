@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
+import { useSession } from "next-auth/react";
 
 export function Shell({ children }: { children: React.ReactNode }) {
+  const { data } = useSession();
   return (
     <>
       <header className="topbar">
@@ -14,7 +16,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
           <nav className="nav-links">
             <Link href="/jobs">Jobs</Link>
             <Link href="/post">Post a job</Link>
-            <Link href="/account">Account</Link>
+            <Link href="/account">{data?.user ? data.user.name?.split(" ")[0] || "Account" : "Sign in"}</Link>
           </nav>
         </div>
       </header>
