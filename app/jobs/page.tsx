@@ -4,7 +4,7 @@ import { Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { CATEGORIES, CITIES, SEED_JOBS, filterJobs, type Job } from "@/lib/jobs";
 import { JobCard } from "@/components/JobCard";
-import { Shell, useLang } from "@/components/Shell";
+import { Shell } from "@/components/Shell";
 
 function extras(): Job[] {
   if (typeof window === "undefined") return [];
@@ -26,7 +26,6 @@ export default function JobsPage() {
 }
 
 function List() {
-  const { lang, t } = useLang();
   const params = useSearchParams();
   const [q, setQ] = useState(params.get("q") || "");
   const [category, setCategory] = useState(params.get("category") || "");
@@ -40,29 +39,29 @@ function List() {
   return (
     <div className="wrap section">
       <div className="page-head">
-        <h1>{t("تمام نوکریاں", "All jobs")}</h1>
+        <h1>All jobs</h1>
       </div>
       <div className="filters">
-        <input className="chip" style={{ minWidth: 200 }} value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("تلاش", "Search")} />
+        <input className="chip" style={{ minWidth: 200 }} value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search" />
         <select className="chip" value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="">{t("کیٹگری", "Category")}</option>
+          <option value="">Category</option>
           {CATEGORIES.map((c) => (
             <option key={c}>{c}</option>
           ))}
         </select>
         <select className="chip" value={location} onChange={(e) => setLocation(e.target.value)}>
-          <option value="">{t("مقام", "Location")}</option>
+          <option value="">Location</option>
           {CITIES.map((c) => (
             <option key={c}>{c}</option>
           ))}
         </select>
         <button className="chip" onClick={() => setGulf((v) => !v)}>
-          {gulf ? t("تمام", "All markets") : t("گلف", "Gulf only")}
+          {gulf ? "All markets" : "Gulf only"}
         </button>
       </div>
       <div className="grid">
         {jobs.map((job) => (
-          <JobCard key={job.id} job={job} ur={lang === "ur"} />
+          <JobCard key={job.id} job={job} />
         ))}
       </div>
     </div>
