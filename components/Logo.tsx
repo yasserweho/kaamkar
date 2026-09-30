@@ -1,24 +1,44 @@
-export function LogoMark({ size = 36 }: { size?: number }) {
+export function LogoMark({ size = 40 }: { size?: number }) {
   return (
     <svg
       className="logo-mark"
       width={size}
       height={size}
-      viewBox="0 0 48 48"
+      viewBox="0 0 64 64"
       fill="none"
       aria-hidden="true"
     >
-      <rect width="48" height="48" rx="12" fill="#0F3D2C" />
-      <rect x="2" y="2" width="44" height="44" rx="10" stroke="#C9A227" strokeWidth="1.5" opacity="0.85" />
-      <path d="M16 12v24" stroke="#EFE6D4" strokeWidth="3.2" strokeLinecap="round" />
+      <defs>
+        <linearGradient id="kk-bg" x1="8" y1="4" x2="58" y2="62" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#165C3F" />
+          <stop offset="1" stopColor="#0B2E22" />
+        </linearGradient>
+        <linearGradient id="kk-gold" x1="18" y1="12" x2="54" y2="52" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#E8C86A" />
+          <stop offset="1" stopColor="#B8891C" />
+        </linearGradient>
+      </defs>
+      <rect width="64" height="64" rx="16" fill="url(#kk-bg)" />
+      <rect x="2.5" y="2.5" width="59" height="59" rx="14" stroke="url(#kk-gold)" strokeWidth="1.4" opacity="0.7" />
       <path
-        d="M16 24L32 12M16 24L33 36"
-        stroke="#EFE6D4"
-        strokeWidth="3.2"
+        d="M18 16v32"
+        stroke="#F6F1E4"
+        strokeWidth="5.2"
         strokeLinecap="round"
-        strokeLinejoin="round"
       />
-      <circle cx="33.5" cy="36" r="3.2" fill="#C9A227" />
+      <path
+        d="M20.5 32.5L42 17"
+        stroke="#F6F1E4"
+        strokeWidth="5.2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M20.5 32.5L46 47.5"
+        stroke="url(#kk-gold)"
+        strokeWidth="5.2"
+        strokeLinecap="round"
+      />
+      <circle cx="46" cy="47.5" r="3.6" fill="#E8C86A" />
     </svg>
   );
 }
@@ -28,8 +48,8 @@ export function Logo() {
     <span className="brand">
       <LogoMark />
       <span className="wordmark">
-        Kaamkar
-        <small>Jobs · Pakistan & Gulf</small>
+        <span className="wordmark-name">Kaamkar</span>
+        <small>Pakistan &amp; Gulf jobs</small>
       </span>
     </span>
   );
