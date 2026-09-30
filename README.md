@@ -1,2 +1,6 @@
-# kaamkar
-Kaamkar — jobs across Pakistan and the Gulf. Local + overseas + skilled trades.
+# Kaamkar
+
+Job board for Pakistan, Asia, and the Gulf.
+
+Repo: https://github.com/yasserweho/kaamkar
+Domain: www.kaamkar.com
