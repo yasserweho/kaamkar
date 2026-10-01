@@ -38,7 +38,7 @@ function Home() {
     <>
       <section className="hero">
         <div className="wrap">
-          <h1>Find work. Reach the Gulf.</h1>
+          <h1>Find work from Pakistan to the Gulf</h1>
           <p>Office roles, skilled trades, driving, and visa jobs across Pakistan and the Gulf — in one board.</p>
           <div className="search">
             <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Job, skill, company…" />
