@@ -10,7 +10,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
     <>
       <header className="topbar">
         <div className="wrap nav">
-          <Link href="/" aria-label="Kaamkar home">
+          <Link href="/" aria-label="kaamkar.com home">
             <Logo />
           </Link>
           <nav className="nav-links">
