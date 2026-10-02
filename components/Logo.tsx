@@ -48,8 +48,8 @@ export function Logo() {
     <span className="brand">
       <LogoMark />
       <span className="wordmark">
-        <span className="wordmark-name">Kaamkar</span>
-        <small>Pakistan &amp; Gulf jobs</small>
+        <span className="wordmark-name">kaamkar.com</span>
+        <small>Pakistan & Gulf jobs</small>
       </span>
     </span>
   );
