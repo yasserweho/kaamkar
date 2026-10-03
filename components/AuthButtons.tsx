@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 type Providers = Record<string, { id: string; name: string }>;
@@ -8,7 +8,9 @@ type Providers = Record<string, { id: string; name: string }>;
 export function AuthButtons({ compact = false }: { compact?: boolean }) {
   const { data, status } = useSession();
   const [providers, setProviders] = useState<Providers | null>(null);
+  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     fetch("/api/auth/providers")
@@ -17,7 +19,7 @@ export function AuthButtons({ compact = false }: { compact?: boolean }) {
       .catch(() => setProviders({}));
   }, []);
 
-  if (status === "loading" || providers === null) {
+  if (status === "loading") {
     return <span className="meta">Checking login…</span>;
   }
 
@@ -41,11 +43,7 @@ export function AuthButtons({ compact = false }: { compact?: boolean }) {
   async function start(provider: "google" | "twitter") {
     setError("");
     if (!providers?.[provider]) {
-      setError(
-        provider === "google"
-          ? "Gmail is not configured on this deploy. Add AUTH_GOOGLE_ID and AUTH_GOOGLE_SECRET in Vercel, then redeploy."
-          : "X is not configured on this deploy. Add AUTH_TWITTER_ID and AUTH_TWITTER_SECRET in Vercel, then redeploy.",
-      );
+      setError("Gmail and X are not connected yet. Use email below — that signs you in now.");
       return;
     }
     const res = await signIn(provider, { callbackUrl: "/account", redirect: false });
@@ -53,8 +51,34 @@ export function AuthButtons({ compact = false }: { compact?: boolean }) {
     else if (res?.url) window.location.href = res.url;
   }
 
+  async function onEmail(e: FormEvent) {
+    e.preventDefault();
+    setError("");
+    setBusy(true);
+    const res = await signIn("credentials", { email, callbackUrl: "/account", redirect: false });
+    setBusy(false);
+    if (!res || res.error) {
+      setError("Enter a valid email, then try again.");
+      return;
+    }
+    window.location.href = res.url || "/account";
+  }
+
   return (
     <div className={compact ? "auth-compact" : "auth-actions"}>
+      <form className="form" onSubmit={onEmail} style={{ width: "100%" }}>
+        <label>Email</label>
+        <input
+          type="email"
+          required
+          placeholder="you@gmail.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <button className="go" type="submit" disabled={busy}>
+          {busy ? "Signing in…" : "Continue with email"}
+        </button>
+      </form>
       <button className="oauth google" type="button" onClick={() => start("google")}>
         Continue with Gmail
       </button>
@@ -62,11 +86,6 @@ export function AuthButtons({ compact = false }: { compact?: boolean }) {
         Continue with X
       </button>
       {error && <p className="meta">{error}</p>}
-      {!providers.google && !providers.twitter && (
-        <p className="meta">
-          Sign-in is off until the Google and X client keys are saved in Vercel. The buttons cannot start OAuth without them.
-        </p>
-      )}
     </div>
   );
 }
