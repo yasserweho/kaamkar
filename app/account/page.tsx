@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Shell } from "@/components/Shell";
 import { AuthButtons } from "@/components/AuthButtons";
@@ -17,6 +18,8 @@ export default function AccountPage() {
 
 function Account() {
   const { data } = useSession();
+  const params = useSearchParams();
+  const authError = params.get("error");
   const [profile, setProfile] = useState<Profile | null>(null);
   const [apps, setApps] = useState<Array<{ title: string; at: string }>>([]);
 
@@ -45,6 +48,11 @@ function Account() {
         <h1>Account</h1>
         <p className="meta">Sign in with Gmail or X, then save your seeker or employer details.</p>
       </div>
+      {authError && (
+        <p className="meta" style={{ color: "#9b2c2c" }}>
+          Google sign-in failed ({authError}). Use a private window on www.kaamkar.com. If this stays, the Google client secret needs to be pasted again as one line.
+        </p>
+      )}
       <div className="panel" style={{ marginBottom: 16 }}>
         <AuthButtons />
       </div>
