@@ -4,14 +4,20 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import Twitter from "next-auth/providers/twitter";
 
+function env(name: string) {
+  return process.env[name] || "";
+}
+
 function clean(value?: string) {
   return (value || "").replace(/\s+/g, "");
 }
 
-const googleId = clean(process.env.AUTH_GOOGLE_ID);
-const googleSecret = clean(process.env.AUTH_GOOGLE_SECRET);
-const twitterId = clean(process.env.AUTH_TWITTER_ID);
-const twitterSecret = clean(process.env.AUTH_TWITTER_SECRET);
+const googleId = clean(env("AUTH_GOOGLE_ID"));
+const googleSecret = clean(env("AUTH_GOOGLE_SECRET"));
+const twitterId = clean(env("AUTH_TWITTER_ID"));
+const twitterSecret = clean(env("AUTH_TWITTER_SECRET"));
+
+export let lastAuthError = "";
 
 const providers: Provider[] = [
   Credentials({
@@ -38,7 +44,6 @@ if (twitterId && twitterSecret) {
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
-  secret: process.env.AUTH_SECRET,
   session: { strategy: "jwt" },
   providers,
   pages: {
@@ -47,7 +52,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   logger: {
     error(error) {
-      console.error("[auth]", error.name, error.message);
+      const cause = error.cause instanceof Error ? error.cause.message : String(error.cause || "");
+      lastAuthError = [error.name, error.message, cause].filter(Boolean).join(" | ").slice(0, 240);
+      console.error("[auth]", lastAuthError);
     },
   },
   callbacks: {

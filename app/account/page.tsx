@@ -22,6 +22,7 @@ function Account() {
   const { data } = useSession();
   const params = useSearchParams();
   const authError = params.get("error");
+  const detail = params.get("detail");
   const [profile, setProfile] = useState<Profile | null>(null);
   const [apps, setApps] = useState<Array<{ title: string; at: string }>>([]);
 
@@ -52,7 +53,7 @@ function Account() {
       </div>
       {authError && (
         <p className="meta" style={{ color: "#9b2c2c" }}>
-          Google sign-in failed ({authError}). Use a private window on www.kaamkar.com. If this stays, the Google client secret needs to be pasted again as one line.
+          Google sign-in failed ({authError}). {detail || "Try again in a private window on www.kaamkar.com."}
         </p>
       )}
       <div className="panel" style={{ marginBottom: 16 }}>
