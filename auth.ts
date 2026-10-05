@@ -4,6 +4,16 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import Twitter from "next-auth/providers/twitter";
 
+function clean(value?: string) {
+  return (value || "").replace(/\s+/g, "");
+}
+
+const googleId = clean(process.env.AUTH_GOOGLE_ID);
+const googleSecret = clean(process.env.AUTH_GOOGLE_SECRET);
+const twitterId = clean(process.env.AUTH_TWITTER_ID);
+const twitterSecret = clean(process.env.AUTH_TWITTER_SECRET);
+const secret = clean(process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET) || "kaamkar-dev-secret-change-me";
+
 const providers: Provider[] = [
   Credentials({
     name: "Email",
@@ -19,33 +29,35 @@ const providers: Provider[] = [
   }),
 ];
 
-if (process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET) {
+if (googleId && googleSecret) {
   providers.push(
     Google({
-      clientId: process.env.AUTH_GOOGLE_ID,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+      clientId: googleId,
+      clientSecret: googleSecret,
     }),
   );
 }
 
-if (process.env.AUTH_TWITTER_ID && process.env.AUTH_TWITTER_SECRET) {
+if (twitterId && twitterSecret) {
   providers.push(
     Twitter({
-      clientId: process.env.AUTH_TWITTER_ID,
-      clientSecret: process.env.AUTH_TWITTER_SECRET,
+      clientId: twitterId,
+      clientSecret: twitterSecret,
     }),
   );
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
-  secret:
-    process.env.AUTH_SECRET ||
-    process.env.NEXTAUTH_SECRET ||
-    "kaamkar-dev-secret-change-me",
+  secret,
   session: { strategy: "jwt" },
   providers,
   pages: { signIn: "/account" },
+  logger: {
+    error(error) {
+      console.error("[auth]", error);
+    },
+  },
   callbacks: {
     jwt({ token, user }) {
       if (user?.email) token.email = user.email;
