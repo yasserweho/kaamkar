@@ -14,6 +14,14 @@ const twitterId = clean(process.env.AUTH_TWITTER_ID);
 const twitterSecret = clean(process.env.AUTH_TWITTER_SECRET);
 const secret = clean(process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET) || "kaamkar-dev-secret-change-me";
 
+const cookieOptions = {
+  httpOnly: true,
+  sameSite: "lax" as const,
+  path: "/",
+  secure: true,
+  domain: ".kaamkar.com",
+};
+
 const providers: Provider[] = [
   Credentials({
     name: "Email",
@@ -53,6 +61,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: { strategy: "jwt" },
   providers,
   pages: { signIn: "/account" },
+  cookies: {
+    sessionToken: { name: "authjs.session-token", options: cookieOptions },
+    callbackUrl: { name: "authjs.callback-url", options: cookieOptions },
+    csrfToken: { name: "authjs.csrf-token", options: { ...cookieOptions, httpOnly: false } },
+    pkceCodeVerifier: { name: "authjs.pkce.code_verifier", options: cookieOptions },
+    state: { name: "authjs.state", options: cookieOptions },
+  },
   logger: {
     error(error) {
       console.error("[auth]", error);
