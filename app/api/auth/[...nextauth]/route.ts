@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { handlers, lastAuthError } from "@/auth";
 
+export const runtime = "nodejs";
+
 async function finish(req: NextRequest, res: Response) {
   const location = res.headers.get("location") || "";
   if (!location.includes("error=")) return res;
