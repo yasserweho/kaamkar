@@ -1,3 +1,5 @@
+import { get, put } from "@vercel/blob";
+
 export type Profile = {
   name: string;
   role: "seeker" | "employer";
@@ -11,43 +13,22 @@ export type Profile = {
 
 const PATH = "profiles.json";
 
-function token() {
-  return process.env.BLOB_READ_WRITE_TOKEN || "";
-}
-
-async function blobUrl() {
-  const response = await fetch(`https://blob.vercel-storage.com?prefix=${PATH}`, {
-    headers: { authorization: `Bearer ${token()}` },
-  });
-  if (!response.ok) return "";
-  const data = await response.json();
-  return data.blobs?.[0]?.url || "";
-}
-
 export async function readProfiles(): Promise<Profile[]> {
-  if (!token()) return [];
-  const url = await blobUrl();
-  if (!url) return [];
-  const response = await fetch(url, { headers: { authorization: `Bearer ${token()}` } });
-  if (!response.ok) return [];
-  const data = await response.json();
+  const result = await get(PATH, { access: "private" }).catch(() => null);
+  if (!result || result.statusCode === 404 || !result.stream) return [];
+  const text = await new Response(result.stream).text();
+  const data = JSON.parse(text || "[]");
   return Array.isArray(data) ? data : [];
 }
 
 export async function saveProfile(profile: Profile) {
-  if (!token()) throw new Error("Profile storage is not connected.");
   const people = await readProfiles();
   const next = [profile, ...people.filter((person) => person.email !== profile.email)].slice(0, 100);
-  const response = await fetch(`https://blob.vercel-storage.com/${PATH}`, {
-    method: "PUT",
-    headers: {
-      authorization: `Bearer ${token()}`,
-      "x-api-version": "7",
-      "x-content-type": "application/json",
-      "x-allow-overwrite": "1",
-    },
-    body: JSON.stringify(next),
+  await put(PATH, JSON.stringify(next), {
+    access: "private",
+    addRandomSuffix: false,
+    allowOverwrite: true,
+    contentType: "application/json",
   });
-  if (!response.ok) throw new Error(await response.text());
   return next;
 }
