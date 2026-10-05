@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Shell } from "@/components/Shell";
@@ -11,7 +11,9 @@ type Profile = { name: string; role: "seeker" | "employer"; phone: string; city:
 export default function AccountPage() {
   return (
     <Shell>
-      <Account />
+      <Suspense fallback={<p className="meta">Loading account…</p>}>
+        <Account />
+      </Suspense>
     </Shell>
   );
 }
