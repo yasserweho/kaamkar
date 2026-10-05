@@ -9,10 +9,15 @@ const providers: Provider[] = [
   Credentials({
     name: "Email",
     credentials: {
-      email: { label: "Email", type: "email" },
+      email: {
+        label: "Email",
+        type: "email",
+      },
     },
     authorize(credentials) {
-      const email = String(credentials?.email || "").trim().toLowerCase();
+      const email = String(credentials?.email || "")
+        .trim()
+        .toLowerCase();
 
       if (!email.includes("@") || email.length < 5) {
         return null;
