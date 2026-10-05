@@ -15,6 +15,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
           </Link>
           <nav className="nav-links">
             <Link href="/jobs">Jobs</Link>
+            <Link href="/people">People</Link>
             <Link href="/post">Post a job</Link>
             <Link href="/account">{data?.user ? data.user.name?.split(" ")[0] || "Account" : "Sign in"}</Link>
           </nav>

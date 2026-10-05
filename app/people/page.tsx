@@ -15,9 +15,14 @@ type Person = {
 
 export default function PeoplePage() {
   const [people, setPeople] = useState<Person[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setPeople(JSON.parse(localStorage.getItem("kaamkar_people") || "[]"));
+    fetch("/api/profiles")
+      .then((response) => response.json())
+      .then((data) => setPeople(Array.isArray(data) ? data : []))
+      .catch(() => setPeople([]))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -25,9 +30,11 @@ export default function PeoplePage() {
       <div className="wrap" style={{ paddingBottom: 64 }}>
         <div className="page-head">
           <h1>People</h1>
-          <p className="meta">Job seekers and employers saved from this browser.</p>
+          <p className="meta">Job seekers and employers posted on Kaamkar.</p>
         </div>
-        {people.length === 0 ? (
+        {loading ? (
+          <p className="meta">Loading…</p>
+        ) : people.length === 0 ? (
           <p className="meta">No profiles yet. <a href="/account">Post yourself</a>.</p>
         ) : (
           people.map((person) => (

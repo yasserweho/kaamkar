@@ -45,6 +45,8 @@ function Account() {
   const detail = params.get("detail");
   const [profile, setProfile] = useState<Profile>(empty);
   const [saved, setSaved] = useState(false);
+  const [message, setMessage] = useState("");
+  const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("kaamkar_profile");
@@ -60,27 +62,37 @@ function Account() {
     setSaved(false);
   }
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const next = { ...profile, savedAt: new Date().toISOString() };
+    setBusy(true);
+    setMessage("");
+    const next = { ...profile, email: profile.email.trim().toLowerCase() };
     localStorage.setItem("kaamkar_profile", JSON.stringify(next));
-    const people = JSON.parse(localStorage.getItem("kaamkar_people") || "[]") as Profile[];
-    const without = people.filter((person) => person.email !== next.email || person.phone !== next.phone);
-    without.unshift(next);
-    localStorage.setItem("kaamkar_people", JSON.stringify(without.slice(0, 50)));
-    setProfile(next);
+    const response = await fetch("/api/profiles", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(next),
+    });
+    const result = await response.json().catch(() => ({}));
+    setBusy(false);
+    if (!response.ok) {
+      setMessage(result.error || "Could not save. Try again.");
+      return;
+    }
+    setProfile(result.profile || next);
     setSaved(true);
+    setMessage("Saved on kaamkar.com.");
   }
 
   return (
     <div className="wrap" style={{ maxWidth: 640, paddingBottom: 64 }}>
       <div className="page-head">
         <h1>Account</h1>
-        <p className="meta">Post yourself as a job seeker or an employer. This saves in this browser.</p>
+        <p className="meta">Post yourself as a job seeker or an employer. This stays on the site.</p>
       </div>
       {authError && (
         <p className="meta" style={{ color: "#9b2c2c" }}>
-          Google sign-in failed ({authError}). {detail || "Use Continue with email, then save your profile."}
+          Google sign-in failed ({authError}). {detail || "You can still save your profile below."}
         </p>
       )}
       <div className="panel" style={{ marginBottom: 16 }}>
@@ -104,8 +116,9 @@ function Account() {
         <input type="email" value={profile.email} onChange={(e) => update("email", e.target.value)} required />
         <label>About</label>
         <textarea value={profile.about} onChange={(e) => update("about", e.target.value)} rows={4} required />
-        <button className="go" type="submit">Save profile</button>
+        <button className="go" type="submit" disabled={busy}>{busy ? "Saving…" : "Save profile"}</button>
       </form>
+      {message && <p className="meta" style={{ marginTop: 12 }}>{message}</p>}
       {saved && (
         <div className="panel" style={{ marginTop: 16 }}>
           <strong>Saved.</strong>
