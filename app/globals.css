@@ -124,8 +124,11 @@ button, input, select, textarea { font: inherit; }
 }
 .oauth.google { background: #fff; color: #1f1f1f; }
 .oauth.x { background: #0f1419; color: #fff; border-color: #0f1419; }
+.foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 18px; }
+.foot-grid a, .foot-grid p { display: block; margin: 6px 0; color: var(--muted); }
 @media (max-width: 800px) {
   .nav-links { font-size: 13px; gap: 10px; }
   .search { grid-template-columns: 1fr; }
   .detail { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr; }
 }

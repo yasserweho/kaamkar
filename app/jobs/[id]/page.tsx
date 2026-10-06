@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useState } from "react";
 import { SEED_JOBS, type Job } from "@/lib/jobs";
 import { Shell } from "@/components/Shell";
+import { HIGHLIGHT, loadJson, saveJson } from "@/lib/portal";
 
 function findJob(id: string | undefined): Job | undefined {
   if (!id) return undefined;
@@ -29,60 +31,46 @@ export default function JobPage() {
 function Detail() {
   const { id } = useParams<{ id: string }>();
   const job = findJob(id);
-  if (!job) {
-    return (
-      <div className="wrap page-head">
-        <p>Job not found.</p>
-      </div>
-    );
-  }
+  const [saved, setSaved] = useState(false);
+  if (!job) return <div className="wrap page-head"><p>Job not found.</p></div>;
   const wa = job.applyWhatsApp
     ? `https://wa.me/${job.applyWhatsApp}?text=${encodeURIComponent("Hello, I am applying for " + job.title + " via Kaamkar")}`
     : null;
+  const highlight = HIGHLIGHT[job.id];
+
+  function save() {
+    const ids = loadJson<string[]>("kaamkar_saved", []);
+    if (!ids.includes(job!.id)) ids.unshift(job!.id);
+    saveJson("kaamkar_saved", ids);
+    setSaved(true);
+  }
+
   return (
     <div className="wrap">
       <div className="page-head">
-        <div className="meta">
-          {job.city}, {job.country} · {job.category}
-        </div>
+        <div className="meta">{job.city}, {job.country} · {job.category}{highlight ? ` · ${highlight}` : ""}</div>
         <h1>{job.title}</h1>
-        <p className="meta">{job.company}</p>
+        <p className="meta"><Link href={`/companies/${job.company.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`}>{job.company}</Link></p>
       </div>
       <div className="detail">
         <div className="panel">
           <p>{job.description}</p>
-          <p>
-            <strong>Experience:</strong> {job.experience}
-          </p>
+          <p><strong>Experience:</strong> {job.experience}</p>
           <div className="tags">
             {job.visa && <span className="tag">Visa</span>}
             {job.housing && <span className="tag">Housing</span>}
-            {job.tags.map((x) => (
-              <span className="tag" key={x}>
-                {x}
-              </span>
-            ))}
+            {job.tags.map((x) => <span className="tag" key={x}>{x}</span>)}
           </div>
         </div>
         <aside className="panel">
-          <div className="salary" style={{ fontSize: 20 }}>
-            {job.salary}
-          </div>
-          <p className="meta">{job.type}</p>
+          <div className="salary" style={{ fontSize: 20 }}>{job.salary}</div>
+          <p className="meta">{job.type} · {job.posted}</p>
           <div className="form" style={{ marginTop: 12 }}>
-            <Link className="go" href={`/apply/${job.id}`} style={{ textAlign: "center" }}>
-              Apply now
-            </Link>
-            {wa && (
-              <a className="chip" href={wa} target="_blank" rel="noreferrer" style={{ textAlign: "center" }}>
-                WhatsApp
-              </a>
-            )}
-            {job.applyEmail && (
-              <a className="chip" href={`mailto:${job.applyEmail}`} style={{ textAlign: "center" }}>
-                {job.applyEmail}
-              </a>
-            )}
+            <Link className="go" href={`/apply/${job.id}`} style={{ textAlign: "center" }}>Apply now</Link>
+            <button className="chip" onClick={save}>{saved ? "Saved" : "Save job"}</button>
+            <Link className="chip" href="/alerts" style={{ textAlign: "center" }}>Alert me</Link>
+            {wa && <a className="chip" href={wa} target="_blank" rel="noreferrer" style={{ textAlign: "center" }}>WhatsApp</a>}
+            {job.applyEmail && <a className="chip" href={`mailto:${job.applyEmail}`} style={{ textAlign: "center" }}>{job.applyEmail}</a>}
           </div>
         </aside>
       </div>

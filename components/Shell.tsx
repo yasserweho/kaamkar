@@ -15,15 +15,33 @@ export function Shell({ children }: { children: React.ReactNode }) {
           </Link>
           <nav className="nav-links">
             <Link href="/jobs">Jobs</Link>
-            <Link href="/people">People</Link>
-            <Link href="/post">Post a job</Link>
+            <Link href="/cv">CV</Link>
+            <Link href="/alerts">Alerts</Link>
+            <Link href="/hire">Hire</Link>
             <Link href="/account">{data?.user ? data.user.name?.split(" ")[0] || "Account" : "Sign in"}</Link>
           </nav>
         </div>
       </header>
       {children}
       <footer className="foot">
-        <div className="wrap">Kaamkar · Jobs for Pakistan, Asia and the Middle East · kaamkar.com</div>
+        <div className="wrap foot-grid">
+          <div>
+            <strong>Kaamkar</strong>
+            <p>Jobs for Pakistan, Asia and the Middle East.</p>
+          </div>
+          <div>
+            <Link href="/jobs">Search jobs</Link>
+            <Link href="/cv">CV builder</Link>
+            <Link href="/applications">My applications</Link>
+            <Link href="/coach">Career coach</Link>
+          </div>
+          <div>
+            <Link href="/companies">Top employers</Link>
+            <Link href="/hire/packages">Hiring packages</Link>
+            <Link href="/hire/search">CV search</Link>
+            <Link href="/campus">Campus hiring</Link>
+          </div>
+        </div>
       </footer>
     </>
   );
