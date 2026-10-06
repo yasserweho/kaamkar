@@ -4,7 +4,17 @@ import { useEffect, useState } from "react";
 import { Shell } from "@/components/Shell";
 import { loadJson, saveJson } from "@/lib/portal";
 
-type App = Record<string, string> & { rating?: number; folder?: string; note?: string };
+type App = {
+  name?: string;
+  title?: string;
+  city?: string;
+  salary?: string;
+  phone?: string;
+  cover?: string;
+  note?: string;
+  folder?: string;
+  rating?: string;
+};
 
 export default function InboxPage() {
   return <Shell><Inbox /></Shell>;
@@ -12,7 +22,7 @@ export default function InboxPage() {
 
 function Inbox() {
   const [apps, setApps] = useState<App[]>([]);
-  useEffect(() => setApps(loadJson("kaamkar_apps", [])), []);
+  useEffect(() => setApps(loadJson<App[]>("kaamkar_apps", [])), []);
   function update(i: number, patch: Partial<App>) {
     const next = apps.map((a, idx) => (idx === i ? { ...a, ...patch } : a));
     setApps(next);
