@@ -128,11 +128,11 @@ button, input, select, textarea { font: inherit; }
 .foot-grid a, .foot-grid p { display: block; margin: 6px 0; color: var(--muted); }
 .hero-stage {
   position: relative;
-  min-height: 620px;
-  padding: 88px 0 56px;
+  min-height: 560px;
+  padding: 56px 0 48px;
   overflow: hidden;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   background: #1a2e26;
 }
 .hero-bg {
@@ -172,6 +172,6 @@ button, input, select, textarea { font: inherit; }
   .search { grid-template-columns: 1fr; }
   .detail { grid-template-columns: 1fr; }
   .foot-grid { grid-template-columns: 1fr; }
-  .hero-stage { min-height: 680px; padding: 64px 0 36px; align-items: flex-end; }
+  .hero-stage { min-height: 600px; padding: 48px 0 32px; align-items: center; }
   .hero-bg { object-position: center 22%; }
 }
