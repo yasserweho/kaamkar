@@ -67,7 +67,14 @@ function Home() {
               ))}
             </div>
           </div>
-          <img className="hero-photo" src="/hero-woman.jpg" alt="Pakistani woman in a green outfit" />
+          <aside className="hero-card">
+            <img className="hero-photo" src="/hero-woman.jpg" alt="Pakistani professional in a green outfit" />
+            <div className="hero-caption">
+              <span>Featured on Kaamkar</span>
+              <strong>Pakistan to the Gulf</strong>
+              <p>Office roles, skilled trades, and visa jobs in one board.</p>
+            </div>
+          </aside>
         </div>
       </section>
       <section className="section">
