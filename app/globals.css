@@ -141,7 +141,7 @@ button, input, select, textarea { font: inherit; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 72% 20%;
+  object-position: center 30%;
 }
 .hero-shade {
   position: absolute;
@@ -173,5 +173,5 @@ button, input, select, textarea { font: inherit; }
   .detail { grid-template-columns: 1fr; }
   .foot-grid { grid-template-columns: 1fr; }
   .hero-stage { min-height: 680px; padding: 64px 0 36px; align-items: flex-end; }
-  .hero-bg { object-position: 64% 12%; }
+  .hero-bg { object-position: center 22%; }
 }
