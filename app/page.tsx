@@ -40,31 +40,34 @@ function Home() {
   return (
     <>
       <section className="hero">
-        <div className="wrap">
-          <h1>Find work from Pakistan to the Gulf</h1>
-          <p>Search, apply, build a CV, and get alerts. Employers can post, shortlist, and search candidates.</p>
-          <div className="search">
-            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Job, skill, company…" />
-            <select value={location} onChange={(e) => setLocation(e.target.value)}>
-              <option value="">City / country</option>
-              {CITIES.map((c) => (
-                <option key={c}>{c}</option>
+        <div className="wrap hero-grid">
+          <div>
+            <h1>Find work from Pakistan to the Gulf</h1>
+            <p>Search, apply, build a CV, and get alerts. Employers can post, shortlist, and search candidates.</p>
+            <div className="search">
+              <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Job, skill, company…" />
+              <select value={location} onChange={(e) => setLocation(e.target.value)}>
+                <option value="">City / country</option>
+                {CITIES.map((c) => (
+                  <option key={c}>{c}</option>
+                ))}
+                <option>Pakistan</option>
+                <option>UAE</option>
+                <option>Saudi Arabia</option>
+                <option>Qatar</option>
+              </select>
+              <Link className="go" href={`/jobs?q=${encodeURIComponent(q)}&location=${encodeURIComponent(location)}`} style={{ textAlign: "center" }}>
+                Search
+              </Link>
+            </div>
+            <div className="pills">
+              <button className="pill" onClick={() => setGulf((v) => !v)}>{gulf ? "All jobs" : "Gulf / visa only"}</button>
+              {CATEGORIES.slice(0, 6).map((c) => (
+                <button key={c} className="pill" onClick={() => setCategory(category === c ? "" : c)}>{c}</button>
               ))}
-              <option>Pakistan</option>
-              <option>UAE</option>
-              <option>Saudi Arabia</option>
-              <option>Qatar</option>
-            </select>
-            <Link className="go" href={`/jobs?q=${encodeURIComponent(q)}&location=${encodeURIComponent(location)}`} style={{ textAlign: "center" }}>
-              Search
-            </Link>
+            </div>
           </div>
-          <div className="pills">
-            <button className="pill" onClick={() => setGulf((v) => !v)}>{gulf ? "All jobs" : "Gulf / visa only"}</button>
-            {CATEGORIES.slice(0, 6).map((c) => (
-              <button key={c} className="pill" onClick={() => setCategory(category === c ? "" : c)}>{c}</button>
-            ))}
-          </div>
+          <img className="hero-photo" src="/hero-woman.jpg" alt="Pakistani woman in a green outfit" />
         </div>
       </section>
       <section className="section">

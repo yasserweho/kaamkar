@@ -126,9 +126,13 @@ button, input, select, textarea { font: inherit; }
 .oauth.x { background: #0f1419; color: #fff; border-color: #0f1419; }
 .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 18px; }
 .foot-grid a, .foot-grid p { display: block; margin: 6px 0; color: var(--muted); }
+.hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 28px; align-items: center; }
+.hero-photo { width: 100%; max-height: 460px; object-fit: cover; border-radius: 24px; border: 1px solid var(--line); box-shadow: 0 16px 40px rgba(18,32,26,.12); }
 @media (max-width: 800px) {
   .nav-links { font-size: 13px; gap: 10px; }
   .search { grid-template-columns: 1fr; }
   .detail { grid-template-columns: 1fr; }
   .foot-grid { grid-template-columns: 1fr; }
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-photo { max-height: 360px; }
 }
