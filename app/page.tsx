@@ -40,7 +40,7 @@ function Home() {
   return (
     <>
       <section className="hero hero-stage">
-        <img className="hero-bg" src="/hero-woman.jpg" alt="" />
+        <img className="hero-bg" src="/hero-mix.jpg" alt="" />
         <div className="hero-shade" />
         <div className="wrap hero-copy">
           <p className="eyebrow">Kaamkar · Pakistan & the Gulf</p>
