@@ -48,7 +48,7 @@ function Post() {
   }
 
   return (
-    <div className="wrap" style={{ maxWidth: 720, paddingBottom: 64 }}>
+    <div className="wrap narrow section">
       <div className="page-head">
         <h1>Post a job</h1>
       </div>

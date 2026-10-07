@@ -16,7 +16,7 @@ function Box() {
     localStorage.setItem("kaamkar_priority", next ? "1" : "0");
   }
   return (
-    <div className="wrap section" style={{ maxWidth: 720 }}>
+    <div className="wrap section narrow">
       <h1>Priority applicant</h1>
       <p className="meta">Puts your application at the top of the employer inbox and marks when the cover letter is viewed. Preview only — no card is charged.</p>
       <div className="panel">

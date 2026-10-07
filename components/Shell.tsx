@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Logo } from "@/components/Logo";
 import { useSession } from "next-auth/react";
+import { Logo } from "@/components/Logo";
+import { SOCIAL } from "@/lib/site";
 
 export function Shell({ children }: { children: React.ReactNode }) {
   const { data } = useSession();
@@ -38,14 +39,18 @@ export function Shell({ children }: { children: React.ReactNode }) {
           <div>
             <Link href="/companies">Top employers</Link>
             <Link href="/guides">Guides</Link>
+            <Link href="/links">Link to us</Link>
             <Link href="/hire/packages">Hiring packages</Link>
-            <Link href="/hire/search">CV search</Link>
             <Link href="/campus">Campus hiring</Link>
           </div>
           <div>
             <strong>Islamabad, Pakistan</strong>
-            <p>hello@kaamkar.com</p>
-            <a href="https://www.youtube.com/@sykkmeuzzik546" rel="me">YouTube</a>
+            <p><a href="mailto:hello@kaamkar.com">hello@kaamkar.com</a></p>
+            <a href={SOCIAL.youtube} rel="me">YouTube</a>
+            <a href={SOCIAL.x} rel="me">X</a>
+            <a href={SOCIAL.instagram} rel="me">Instagram</a>
+            <a href={SOCIAL.facebook} rel="me">Facebook</a>
+            <a href={SOCIAL.linkedin} rel="me">LinkedIn</a>
           </div>
         </div>
       </footer>

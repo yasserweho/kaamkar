@@ -149,6 +149,14 @@ button, input, select, textarea { font: inherit; }
   object-fit: cover;
   object-position: center 30%;
 }
+.narrow { max-width: 720px; }
+.stack { margin-top: 16px; }
+.center-link { text-align: center; }
+.filter-input { min-width: 200px; }
+.salary-lg { font-size: 20px; }
+.error { color: #9b2c2c; }
+.full { width: 100%; }
+.prose pre { white-space: pre-wrap; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
 .hero-shade {
   position: absolute;
   inset: 0;

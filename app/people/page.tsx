@@ -27,7 +27,7 @@ export default function PeoplePage() {
 
   return (
     <Shell>
-      <div className="wrap" style={{ paddingBottom: 64 }}>
+      <div className="wrap section">
         <div className="page-head">
           <h1>People</h1>
           <p className="meta">Job seekers and employers posted on Kaamkar.</p>
@@ -38,7 +38,7 @@ export default function PeoplePage() {
           <p className="meta">No profiles yet. <a href="/account">Post yourself</a>.</p>
         ) : (
           people.map((person) => (
-            <article className="panel" key={`${person.email}-${person.phone}`} style={{ marginBottom: 12 }}>
+            <article className="panel stack" key={`${person.email}-${person.phone}`}>
               <strong>{person.name}</strong>
               <p className="meta">{person.role === "employer" ? "Employer" : "Job seeker"} · {person.title} · {person.city}</p>
               <p>{person.about}</p>

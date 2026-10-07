@@ -6,6 +6,7 @@ import { useState } from "react";
 import { SEED_JOBS, type Job } from "@/lib/jobs";
 import { Shell } from "@/components/Shell";
 import { HIGHLIGHT, loadJson, saveJson } from "@/lib/portal";
+import { jobSlug } from "@/lib/site";
 
 function findJob(id: string | undefined): Job | undefined {
   if (!id) return undefined;
@@ -17,7 +18,7 @@ function findJob(id: string | undefined): Job | undefined {
       extra = [];
     }
   }
-  return [...extra, ...SEED_JOBS].find((j) => j.id === id);
+  return [...extra, ...SEED_JOBS].find((j) => j.id === id || jobSlug(j.title, j.city) === id);
 }
 
 export default function JobPage() {
@@ -63,14 +64,14 @@ function Detail() {
           </div>
         </div>
         <aside className="panel">
-          <div className="salary" style={{ fontSize: 20 }}>{job.salary}</div>
+          <div className="salary salary salary-lg">{job.salary}</div>
           <p className="meta">{job.type} · {job.posted}</p>
-          <div className="form" style={{ marginTop: 12 }}>
-            <Link className="go" href={`/apply/${job.id}`} style={{ textAlign: "center" }}>Apply now</Link>
+          <div className="form stack">
+            <Link className="go center-link" href={`/apply/${job.id}`}>Apply now</Link>
             <button className="chip" onClick={save}>{saved ? "Saved" : "Save job"}</button>
-            <Link className="chip" href="/alerts" style={{ textAlign: "center" }}>Alert me</Link>
-            {wa && <a className="chip" href={wa} target="_blank" rel="noreferrer" style={{ textAlign: "center" }}>WhatsApp</a>}
-            {job.applyEmail && <a className="chip" href={`mailto:${job.applyEmail}`} style={{ textAlign: "center" }}>{job.applyEmail}</a>}
+            <Link className="chip center-link" href="/alerts">Alert me</Link>
+            {wa && <a className="chip center-link" href={wa} target="_blank" rel="noreferrer">WhatsApp</a>}
+            {job.applyEmail && <a className="chip center-link" href={`mailto:${job.applyEmail}`}>{job.applyEmail}</a>}
           </div>
         </aside>
       </div>

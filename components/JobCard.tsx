@@ -3,11 +3,12 @@
 import Link from "next/link";
 import type { Job } from "@/lib/jobs";
 import { HIGHLIGHT } from "@/lib/portal";
+import { jobSlug } from "@/lib/site";
 
 export function JobCard({ job }: { job: Job }) {
   const highlight = HIGHLIGHT[job.id];
   return (
-    <Link className="card" href={`/jobs/${job.id}`}>
+    <Link className="card" href={`/jobs/${jobSlug(job.title, job.city)}`}>
       <div className="row">
         <div className="meta">
           {job.city}, {job.country}

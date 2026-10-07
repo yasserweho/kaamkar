@@ -15,7 +15,7 @@ export default function CampusPage() {
           <p className="meta">Internships and trainee roles for students and fresh graduates.</p>
         </div>
         <div className="pills">{CAMPUSES.map((c) => <span className="pill" key={c}>{c}</span>)}</div>
-        <div className="grid" style={{ marginTop: 18 }}>
+        <div className="grid stack">
           {internships.map((j) => <JobCard key={j.id} job={j} />)}
         </div>
       </div>

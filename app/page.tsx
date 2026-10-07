@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import { CATEGORIES, CITIES, SEED_JOBS, filterJobs, type Job } from "@/lib/jobs";
 import { JobCard } from "@/components/JobCard";
@@ -40,7 +41,7 @@ function Home() {
   return (
     <>
       <section className="hero hero-stage">
-        <img className="hero-bg" src="/hero-mix2.jpg" alt="Pakistani graduates and professionals looking for jobs" width={1176} height={784} />
+        <Image className="hero-bg" src="/hero-mix2.jpg" alt="Pakistani graduates and professionals of different ages looking for jobs" width={1176} height={784} priority />
         <div className="hero-shade" />
         <div className="wrap hero-copy">
           <p className="eyebrow">Kaamkar · Pakistan & the Gulf</p>

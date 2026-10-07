@@ -66,7 +66,7 @@ export function AuthButtons({ compact = false }: { compact?: boolean }) {
 
   return (
     <div className={compact ? "auth-compact" : "auth-actions"}>
-      <form className="form" onSubmit={onEmail} style={{ width: "100%" }}>
+      <form className="form full" onSubmit={onEmail}>
         <label>Email</label>
         <input
           type="email"

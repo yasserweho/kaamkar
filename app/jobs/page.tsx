@@ -52,7 +52,7 @@ function List() {
         <p className="meta">Filter by city, industry, type, and experience. {jobs.length} matches.</p>
       </div>
       <div className="filters">
-        <input className="chip" style={{ minWidth: 200 }} value={q} onChange={(e) => setQ(e.target.value)} placeholder="Keyword" />
+        <input className="chip filter-input" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Keyword" />
         <select className="chip" value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="">Industry</option>
           {CATEGORIES.map((c) => (

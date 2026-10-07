@@ -9,7 +9,9 @@ export function middleware(req: NextRequest) {
     url.hostname = "www.kaamkar.com";
     return NextResponse.redirect(url, 308);
   }
-  return NextResponse.next();
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set("x-pathname", req.nextUrl.pathname);
+  return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
 export const config = {

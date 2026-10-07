@@ -1,14 +1,19 @@
 # Kaamkar
 
-Kaamkar (https://kaamkar.com) is a job board for Pakistan and the Gulf: UAE, Saudi Arabia, Qatar, Oman, Kuwait and Bahrain.
+Kaamkar (https://www.kaamkar.com) is a job board for Pakistan and the Gulf: UAE, Saudi Arabia, Qatar, Oman, Kuwait and Bahrain.
 
 Job seekers can search roles, build a CV, set alerts and apply. Employers can post jobs, search CVs and shortlist applicants.
 
 Main pages:
-- https://kaamkar.com/jobs
-- https://kaamkar.com/cv
-- https://kaamkar.com/hire
-- https://kaamkar.com/companies
-- https://kaamkar.com/guides
+- https://www.kaamkar.com/jobs
+- https://www.kaamkar.com/locations/lahore
+- https://www.kaamkar.com/locations/karachi
+- https://www.kaamkar.com/locations/islamabad
+- https://www.kaamkar.com/locations/dubai
+- https://www.kaamkar.com/cv
+- https://www.kaamkar.com/hire
+- https://www.kaamkar.com/companies
+- https://www.kaamkar.com/guides
+- https://www.kaamkar.com/links
 
 Contact: Islamabad, Pakistan. Email: hello@kaamkar.com

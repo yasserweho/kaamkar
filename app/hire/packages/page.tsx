@@ -29,7 +29,7 @@ function Packs() {
           </article>
         ))}
       </div>
-      {sent && <p className="ok" style={{ marginTop: 16 }}>Request saved for {sent}.</p>}
+      {sent && <p className="ok stack">Request saved for {sent}.</p>}
     </div>
   );
 }

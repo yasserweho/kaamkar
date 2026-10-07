@@ -22,7 +22,7 @@ function Match() {
       <select className="chip" value={id} onChange={(e) => setId(e.target.value)}>
         {SEED_JOBS.map((j) => <option key={j.id} value={j.id}>{j.title}</option>)}
       </select>
-      <div className="grid" style={{ marginTop: 16 }}>
+      <div className="grid stack">
         {ranked.map(({ c, score }) => (
           <article className="card" key={c.id}>
             <strong>{c.name}</strong>

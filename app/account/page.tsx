@@ -85,17 +85,17 @@ function Account() {
   }
 
   return (
-    <div className="wrap" style={{ maxWidth: 640, paddingBottom: 64 }}>
+    <div className="wrap narrow section">
       <div className="page-head">
         <h1>Account</h1>
         <p className="meta">Post yourself as a job seeker or an employer. This stays on the site.</p>
       </div>
       {authError && (
-        <p className="meta" style={{ color: "#9b2c2c" }}>
+        <p className="meta error">
           Google sign-in failed ({authError}). {detail || "You can still save your profile below."}
         </p>
       )}
-      <div className="panel" style={{ marginBottom: 16 }}>
+      <div className="panel stack">
         <AuthButtons />
       </div>
       <form className="form panel" onSubmit={onSubmit}>
@@ -118,9 +118,9 @@ function Account() {
         <textarea value={profile.about} onChange={(e) => update("about", e.target.value)} rows={4} required />
         <button className="go" type="submit" disabled={busy}>{busy ? "Saving…" : "Save profile"}</button>
       </form>
-      {message && <p className="meta" style={{ marginTop: 12 }}>{message}</p>}
+      {message && <p className="meta stack">{message}</p>}
       {saved && (
-        <div className="panel" style={{ marginTop: 16 }}>
+        <div className="panel stack">
           <strong>Saved.</strong>
           <p className="meta">
             {profile.name} is posted as {profile.role === "employer" ? "an employer" : "a job seeker"}

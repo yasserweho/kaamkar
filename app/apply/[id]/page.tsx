@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { SEED_JOBS, type Job } from "@/lib/jobs";
 import { Shell } from "@/components/Shell";
 import { loadJson } from "@/lib/portal";
+import { jobSlug } from "@/lib/site";
 
 function findJob(id: string | undefined): Job | undefined {
   if (!id) return undefined;
@@ -13,7 +14,7 @@ function findJob(id: string | undefined): Job | undefined {
   if (typeof window !== "undefined") {
     try { extra = JSON.parse(localStorage.getItem("kaamkar_jobs") || "[]"); } catch { extra = []; }
   }
-  return [...extra, ...SEED_JOBS].find((j) => j.id === id);
+  return [...extra, ...SEED_JOBS].find((j) => j.id === id || jobSlug(j.title, j.city) === id);
 }
 
 export default function ApplyPage() {
@@ -44,7 +45,7 @@ function Form() {
   }
 
   return (
-    <div className="wrap" style={{ maxWidth: 640, paddingBottom: 64 }}>
+    <div className="wrap narrow section">
       <div className="page-head">
         <h1>Apply — {listing.title}</h1>
         <p className="meta">{listing.company} · {listing.city}. {priority ? "Priority applicant is on." : "Standard application."}</p>

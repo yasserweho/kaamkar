@@ -53,7 +53,7 @@ function Alerts() {
           <div className="card" key={i}><strong>{a.q || "All jobs"}</strong><p className="meta">{a.city || "Any city"} · {a.channel}</p></div>
         ))}
       </div>
-      <h2 style={{ marginTop: 28 }}>Matching now</h2>
+      <h2 className="stack">Matching now</h2>
       <div className="grid">
         {hits.map((j) => (
           <Link className="card" key={j.id} href={`/jobs/${j.id}`}><strong>{j.title}</strong><p className="meta">{j.company} · {j.city}</p></Link>

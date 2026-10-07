@@ -21,7 +21,7 @@ function Coach() {
     ].join(" "));
   }
   return (
-    <div className="wrap section" style={{ maxWidth: 720 }}>
+    <div className="wrap section narrow">
       <h1>Career coach</h1>
       <p className="meta">CV tips, a job-fit check, and a short interview drill. This is an on-site guide, not a live chat model.</p>
       <form className="form panel" onSubmit={run}>
@@ -29,7 +29,7 @@ function Coach() {
         <input value={title} onChange={(e) => setTitle(e.target.value)} />
         <button className="go" type="submit">Prepare me</button>
       </form>
-      {note && <p className="panel" style={{ marginTop: 16 }}>{note}</p>}
+      {note && <p className="panel stack">{note}</p>}
     </div>
   );
 }
