@@ -39,9 +39,9 @@ function Alerts() {
         <p className="meta">Email, SMS, and app-style alerts. Matches show here on this device.</p>
       </div>
       <form className="filters" onSubmit={add}>
-        <input className="chip" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Keyword, e.g. driver" />
-        <input className="chip" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" />
-        <select className="chip" value={channel} onChange={(e) => setChannel(e.target.value)}>
+        <input className="chip" aria-label="Alert keyword" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Keyword, e.g. driver" />
+        <input className="chip" aria-label="Alert city" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" />
+        <select className="chip" aria-label="Alert channel" value={channel} onChange={(e) => setChannel(e.target.value)}>
           <option>Email</option>
           <option>SMS</option>
           <option>App push</option>

@@ -48,8 +48,8 @@ function Home() {
           <h1>Find work from Pakistan to the Gulf</h1>
           <p>Search, apply, build a CV, and get alerts. Employers can post, shortlist, and search candidates.</p>
           <div className="search search-over">
-            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Job, skill, company…" />
-            <select value={location} onChange={(e) => setLocation(e.target.value)}>
+            <input aria-label="Job, skill or company" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Job, skill, company…" />
+            <select aria-label="City or country" value={location} onChange={(e) => setLocation(e.target.value)}>
               <option value="">City / country</option>
               {CITIES.map((c) => (
                 <option key={c}>{c}</option>

@@ -67,9 +67,11 @@ export function AuthButtons({ compact = false }: { compact?: boolean }) {
   return (
     <div className={compact ? "auth-compact" : "auth-actions"}>
       <form className="form full" onSubmit={onEmail}>
-        <label>Email</label>
+        <label htmlFor="signin-email">Email</label>
         <input
+          id="signin-email"
           type="email"
+          aria-label="Email"
           required
           placeholder="you@gmail.com"
           value={email}

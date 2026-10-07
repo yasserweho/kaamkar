@@ -99,23 +99,23 @@ function Account() {
         <AuthButtons />
       </div>
       <form className="form panel" onSubmit={onSubmit}>
-        <label>I am</label>
-        <select value={profile.role} onChange={(e) => update("role", e.target.value)}>
+        <label htmlFor="role">I am</label>
+        <select id="role" aria-label="I am" value={profile.role} onChange={(e) => update("role", e.target.value)}>
           <option value="seeker">Job seeker</option>
           <option value="employer">Employer</option>
         </select>
-        <label>Name</label>
-        <input value={profile.name} onChange={(e) => update("name", e.target.value)} required />
-        <label>{profile.role === "employer" ? "Company or trade" : "Job title"}</label>
-        <input value={profile.title} onChange={(e) => update("title", e.target.value)} required placeholder={profile.role === "employer" ? "Al Kabir Builders" : "Electrician"} />
-        <label>City</label>
-        <input value={profile.city} onChange={(e) => update("city", e.target.value)} required />
-        <label>WhatsApp</label>
-        <input value={profile.phone} onChange={(e) => update("phone", e.target.value)} required placeholder="03xx" />
-        <label>Email</label>
-        <input type="email" value={profile.email} onChange={(e) => update("email", e.target.value)} required />
-        <label>About</label>
-        <textarea value={profile.about} onChange={(e) => update("about", e.target.value)} rows={4} required />
+        <label htmlFor="name">Name</label>
+        <input id="name" aria-label="Name" value={profile.name} onChange={(e) => update("name", e.target.value)} required />
+        <label htmlFor="title">{profile.role === "employer" ? "Company or trade" : "Job title"}</label>
+        <input id="title" aria-label={profile.role === "employer" ? "Company or trade" : "Job title"} value={profile.title} onChange={(e) => update("title", e.target.value)} required placeholder={profile.role === "employer" ? "Al Kabir Builders" : "Electrician"} />
+        <label htmlFor="city">City</label>
+        <input id="city" aria-label="City" value={profile.city} onChange={(e) => update("city", e.target.value)} required />
+        <label htmlFor="phone">WhatsApp</label>
+        <input id="phone" aria-label="WhatsApp" value={profile.phone} onChange={(e) => update("phone", e.target.value)} required placeholder="03xx" />
+        <label htmlFor="email">Email</label>
+        <input id="email" aria-label="Email" type="email" value={profile.email} onChange={(e) => update("email", e.target.value)} required />
+        <label htmlFor="about">About</label>
+        <textarea id="about" aria-label="About" value={profile.about} onChange={(e) => update("about", e.target.value)} rows={4} required />
         <button className="go" type="submit" disabled={busy}>{busy ? "Saving…" : "Save profile"}</button>
       </form>
       {message && <p className="meta stack">{message}</p>}

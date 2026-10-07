@@ -54,20 +54,20 @@ function Form() {
         <div className="ok">Application saved. Track it under <Link href="/applications">My applications</Link>.</div>
       ) : (
         <form className="form panel" onSubmit={onSubmit}>
-          <label>Full name</label>
-          <input name="name" required defaultValue={cv.name || ""} />
-          <label>Phone / WhatsApp</label>
-          <input name="phone" required placeholder="92…" defaultValue={cv.phone || ""} />
-          <label>Email</label>
-          <input name="email" type="email" defaultValue={cv.email || ""} />
-          <label>CNIC</label>
-          <input name="cnic" required placeholder="35202-1234567-1" defaultValue={cv.cnic || ""} />
-          <label>Expected salary</label>
-          <input name="salary" required placeholder="PKR 80,000" defaultValue={cv.salary || ""} />
-          <label>City</label>
-          <input name="city" defaultValue={cv.city || ""} />
-          <label>Cover letter</label>
-          <textarea name="cover" rows={5} defaultValue={cv.cover || ""} placeholder="Why you fit this role" />
+          <label htmlFor="apply-name">Full name</label>
+          <input id="apply-name" name="name" required defaultValue={cv.name || ""} />
+          <label htmlFor="apply-phone">Phone / WhatsApp</label>
+          <input id="apply-phone" name="phone" required placeholder="92…" defaultValue={cv.phone || ""} />
+          <label htmlFor="apply-email">Email</label>
+          <input id="apply-email" name="email" type="email" defaultValue={cv.email || ""} />
+          <label htmlFor="apply-cnic">CNIC</label>
+          <input id="apply-cnic" name="cnic" required placeholder="35202-1234567-1" defaultValue={cv.cnic || ""} />
+          <label htmlFor="apply-salary">Expected salary</label>
+          <input id="apply-salary" name="salary" required placeholder="PKR 80,000" defaultValue={cv.salary || ""} />
+          <label htmlFor="apply-city">City</label>
+          <input id="apply-city" name="city" defaultValue={cv.city || ""} />
+          <label htmlFor="apply-cover">Cover letter</label>
+          <textarea id="apply-cover" name="cover" rows={5} defaultValue={cv.cover || ""} placeholder="Why you fit this role" />
           <p className="meta">No CV yet? <Link href="/cv">Build one</Link>. Want the top of the pile? <Link href="/priority">Priority applicant</Link>.</p>
           <button className="go" type="submit">Submit application</button>
         </form>

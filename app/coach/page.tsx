@@ -25,8 +25,8 @@ function Coach() {
       <h1>Career coach</h1>
       <p className="meta">CV tips, a job-fit check, and a short interview drill. This is an on-site guide, not a live chat model.</p>
       <form className="form panel" onSubmit={run}>
-        <label>Role you want</label>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} />
+        <label htmlFor="role-wanted">Role you want</label>
+        <input id="role-wanted" aria-label="Role you want" value={title} onChange={(e) => setTitle(e.target.value)} />
         <button className="go" type="submit">Prepare me</button>
       </form>
       {note && <p className="panel stack">{note}</p>}

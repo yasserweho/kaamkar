@@ -52,25 +52,25 @@ function List() {
         <p className="meta">Filter by city, industry, type, and experience. {jobs.length} matches.</p>
       </div>
       <div className="filters">
-        <input className="chip filter-input" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Keyword" />
-        <select className="chip" value={category} onChange={(e) => setCategory(e.target.value)}>
+        <input className="chip filter-input" aria-label="Keyword" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Keyword" />
+        <select className="chip" aria-label="Industry" value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="">Industry</option>
           {CATEGORIES.map((c) => (
             <option key={c}>{c}</option>
           ))}
         </select>
-        <select className="chip" value={location} onChange={(e) => setLocation(e.target.value)}>
+        <select className="chip" aria-label="City" value={location} onChange={(e) => setLocation(e.target.value)}>
           <option value="">City</option>
           {CITIES.map((c) => (
             <option key={c}>{c}</option>
           ))}
         </select>
-        <select className="chip" value={type} onChange={(e) => setType(e.target.value)}>
+        <select className="chip" aria-label="Job type" value={type} onChange={(e) => setType(e.target.value)}>
           {TYPES.map((t) => (
             <option key={t} value={t}>{t || "Job type"}</option>
           ))}
         </select>
-        <select className="chip" value={level} onChange={(e) => setLevel(e.target.value)}>
+        <select className="chip" aria-label="Experience" value={level} onChange={(e) => setLevel(e.target.value)}>
           <option value="">Experience</option>
           <option value="fresh">Fresh / junior</option>
           <option value="senior">Senior / management</option>

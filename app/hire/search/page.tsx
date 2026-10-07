@@ -21,8 +21,8 @@ function Search() {
     <div className="wrap section">
       <div className="page-head"><h1>CV search</h1><p className="meta">Search candidates who may not have applied. Download is a preview.</p></div>
       <div className="filters">
-        <input className="chip" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Skill or title" />
-        <input className="chip" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" />
+        <input className="chip" aria-label="Skill or title" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Skill or title" />
+        <input className="chip" aria-label="City" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" />
       </div>
       <div className="grid">
         {rows.map((c) => (

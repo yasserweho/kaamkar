@@ -18,20 +18,20 @@ function Tools() {
       <div className="grid">
         <form className="card form" onSubmit={(e) => { e.preventDefault(); }}>
           <strong>Interview scheduler</strong>
-          <input value={slot} onChange={(e) => setSlot(e.target.value)} placeholder="Tue 11:00, Gulberg" />
+          <input aria-label="Interview slot" value={slot} onChange={(e) => setSlot(e.target.value)} placeholder="Tue 11:00, Gulberg" />
           <button className="go" type="submit">Save slot</button>
           {slot && <p className="meta">Slot: {slot}</p>}
         </form>
         <form className="card form" onSubmit={(e) => { e.preventDefault(); setQuestions([question, ...questions]); setQuestion(""); }}>
           <strong>Test builder</strong>
-          <input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Question" />
+          <input aria-label="Test question" value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Question" />
           <button className="go" type="submit">Add question</button>
           {questions.map((q) => <p className="meta" key={q}>{q}</p>)}
         </form>
         <form className="card form" onSubmit={(e) => e.preventDefault()}>
           <strong>Evaluation form</strong>
-          <label>Score 1–5</label>
-          <input value={score} onChange={(e) => setScore(e.target.value)} />
+          <label htmlFor="score">Score 1–5</label>
+          <input id="score" aria-label="Score 1 to 5" value={score} onChange={(e) => setScore(e.target.value)} />
           <p className="meta">Saved score {score}. Use the inbox to attach it to a person.</p>
         </form>
       </div>

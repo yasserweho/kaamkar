@@ -30,16 +30,16 @@ function Builder() {
         <form className="form panel" onSubmit={(e) => { e.preventDefault(); saveJson("kaamkar_cv", cv); setSaved(true); }}>
           {(["name", "title", "city", "phone", "email", "cnic", "salary", "education", "skills"] as const).map((key) => (
             <span key={key}>
-              <label>{key}</label>
-              <input value={cv[key]} onChange={(e) => set(key, e.target.value)} />
+              <label htmlFor={`cv-${key}`}>{key}</label>
+              <input id={`cv-${key}`} aria-label={key} value={cv[key]} onChange={(e) => set(key, e.target.value)} />
             </span>
           ))}
-          <label>Experience</label>
-          <textarea rows={3} value={cv.experience} onChange={(e) => set("experience", e.target.value)} />
-          <label>About</label>
-          <textarea rows={3} value={cv.about} onChange={(e) => set("about", e.target.value)} />
-          <label>Cover letter</label>
-          <textarea rows={4} value={cv.cover} onChange={(e) => set("cover", e.target.value)} placeholder="I am applying because…" />
+          <label htmlFor="cv-experience">Experience</label>
+          <textarea id="cv-experience" aria-label="Experience" rows={3} value={cv.experience} onChange={(e) => set("experience", e.target.value)} />
+          <label htmlFor="cv-about">About</label>
+          <textarea id="cv-about" aria-label="About" rows={3} value={cv.about} onChange={(e) => set("about", e.target.value)} />
+          <label htmlFor="cv-cover">Cover letter</label>
+          <textarea id="cv-cover" aria-label="Cover letter" rows={4} value={cv.cover} onChange={(e) => set("cover", e.target.value)} placeholder="I am applying because…" />
           <button className="go" type="submit">Save CV</button>
           {saved && <p className="ok">Saved.</p>}
         </form>

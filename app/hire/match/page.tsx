@@ -19,7 +19,7 @@ function Match() {
   return (
     <div className="wrap section">
       <div className="page-head"><h1>InstaMatch</h1><p className="meta">Suggested candidates for a posting. Invite is saved as a note on this device.</p></div>
-      <select className="chip" value={id} onChange={(e) => setId(e.target.value)}>
+      <select className="chip" aria-label="Job to match" value={id} onChange={(e) => setId(e.target.value)}>
         {SEED_JOBS.map((j) => <option key={j.id} value={j.id}>{j.title}</option>)}
       </select>
       <div className="grid stack">
