@@ -37,9 +37,15 @@ export function Shell({ children }: { children: React.ReactNode }) {
           </div>
           <div>
             <Link href="/companies">Top employers</Link>
+            <Link href="/guides">Guides</Link>
             <Link href="/hire/packages">Hiring packages</Link>
             <Link href="/hire/search">CV search</Link>
             <Link href="/campus">Campus hiring</Link>
+          </div>
+          <div>
+            <strong>Islamabad, Pakistan</strong>
+            <p>hello@kaamkar.com</p>
+            <a href="https://www.youtube.com/@sykkmeuzzik546" rel="me">YouTube</a>
           </div>
         </div>
       </footer>

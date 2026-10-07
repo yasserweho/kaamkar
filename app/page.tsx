@@ -40,7 +40,7 @@ function Home() {
   return (
     <>
       <section className="hero hero-stage">
-        <img className="hero-bg" src="/hero-mix2.jpg" alt="" />
+        <img className="hero-bg" src="/hero-mix2.jpg" alt="Pakistani graduates and professionals looking for jobs" width={1176} height={784} />
         <div className="hero-shade" />
         <div className="wrap hero-copy">
           <p className="eyebrow">Kaamkar · Pakistan & the Gulf</p>
@@ -58,7 +58,7 @@ function Home() {
               <option>Saudi Arabia</option>
               <option>Qatar</option>
             </select>
-            <Link className="go" href={`/jobs?q=${encodeURIComponent(q)}&location=${encodeURIComponent(location)}`} style={{ textAlign: "center" }}>
+            <Link className="go search-go" href={`/jobs?q=${encodeURIComponent(q)}&location=${encodeURIComponent(location)}`}>
               Search
             </Link>
           </div>
@@ -72,8 +72,8 @@ function Home() {
       </section>
       <section className="section">
         <div className="wrap">
-          <div className="row" style={{ marginBottom: 14 }}>
-            <strong>Premium and top jobs</strong>
+          <div className="row section-head">
+            <h2>Premium and top jobs</h2>
             <Link href="/hire/packages">Highlight a job</Link>
           </div>
           <div className="grid">
@@ -81,8 +81,8 @@ function Home() {
               <JobCard key={job.id} job={job} />
             ))}
           </div>
-          <div className="row" style={{ margin: "28px 0 14px" }}>
-            <strong>Top employers</strong>
+          <div className="row section-head">
+            <h2>Top employers</h2>
             <Link href="/companies">View all</Link>
           </div>
           <div className="pills">
@@ -90,8 +90,8 @@ function Home() {
               <Link className="pill" key={c.slug} href={`/companies/${c.slug}`}>{c.name}</Link>
             ))}
           </div>
-          <div className="row" style={{ margin: "28px 0 14px" }}>
-            <strong>{jobs.length} open roles</strong>
+          <div className="row section-head">
+            <h2>{jobs.length} open roles</h2>
             <Link href="/post">Post a job</Link>
           </div>
           <div className="grid">
@@ -99,14 +99,23 @@ function Home() {
               <JobCard key={job.id} job={job} />
             ))}
           </div>
-          <div className="row" style={{ margin: "28px 0 14px" }}>
-            <strong>Senior management</strong>
+          <div className="row section-head">
+            <h2>Senior management jobs</h2>
             <Link href="/jobs?q=manager">View senior roles</Link>
           </div>
           <div className="grid">
             {senior.map((job) => (
               <JobCard key={job.id} job={job} />
             ))}
+          </div>
+          <div className="prose">
+            <h2>Jobs across Pakistan and the Gulf</h2>
+            <p>
+              Kaamkar lists office roles, skilled trades, driving and visa jobs. Search by city and industry, save a role, and apply with a CV. Employers can post a job, search candidates and shortlist applicants.
+            </p>
+            <p>
+              Start with <a href="/jobs?location=Lahore">Lahore jobs</a>, <a href="/jobs?location=Karachi">Karachi jobs</a>, <a href="/jobs?location=Dubai">Dubai jobs</a>, or read the <a href="/guides">job search guides</a>.
+            </p>
           </div>
         </div>
       </section>
